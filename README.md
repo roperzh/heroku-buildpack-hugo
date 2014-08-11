@@ -41,7 +41,8 @@ To fetch the great [hyde](https://github.com/spf13/hyde.git) theme:
 https://github.com/spf13/hyde.git
 ```
 
-[Here]() is an example application, and [here]() is the code.
+[Here](http://immense-hollows-6319.herokuapp.com/) is an example application,
+and [here](https://github.com/roperzh/example-heroku-buildpack-hugo) is the code.
 
 Alternative method
 ---
