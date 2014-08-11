@@ -1,0 +1,7 @@
+#!/bin/sh
+
+cat << EOF
+---
+default_process_types:
+  web: "cd public && python -m SimpleHTTPServer \$PORT"
+EOF

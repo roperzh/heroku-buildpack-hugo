@@ -1,0 +1,48 @@
+#!/bin/sh
+# bin/compile <build-dir> <cache-dir>
+set -e
+
+# Used to format the output based on heroku guidelines
+# https://devcenter.heroku.com/articles/buildpack-api#style
+indent() {
+  RE="s/^/       /"
+  sed $SED_FLAG "$RE"
+}
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+
+# Hugo version
+VERSION="0.11"
+
+# Hugo URL ( download from GH builds )
+ARCHIVE_NAME=hugo_${VERSION}_linux_amd64
+FILE_NAME=${ARCHIVE_NAME}.tar.gz
+HUGO_PACKAGE=https://github.com/spf13/hugo/releases/download/v${VERSION}/${FILE_NAME}
+
+# Store the hugo package in the cache_dir ( persistent across builds )
+mkdir -p $CACHE_DIR
+if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
+  echo "\n-----> Fetching Hugo ${VERSION} binaries at ${HUGO_PACKAGE}"
+  curl $HUGO_PACKAGE -L -s -o $CACHE_DIR/$FILE_NAME | indent
+fi
+
+# Extract the binary in the working directory
+echo "\n-----> Extracting Hugo ${VERSION} binaries to ${BUILD_DIR}/vendor/hugo"
+mkdir -p $CACHE_DIR/$ARCHIVE_NAME | indent
+tar -zxvf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR | indent
+mv $CACHE_DIR/$ARCHIVE_NAME/$ARCHIVE_NAME $BUILD_DIR/hugo | indent
+
+# Fetch a theme specified in the .hugotheme file
+if [ -e $BUILD_DIR/.hugotheme ]; then
+  echo "\n-----> Getting the theme"
+  THEME_URL="`cat $BUILD_DIR/.hugotheme`"
+  rm -rf $BUILD_DIR/themes && mkdir $BUILD_DIR/themes && cd $BUILD_DIR/themes
+  git clone $THEME_URL
+fi
+
+# Build the site
+echo "\n-----> Building the site"
+cd $BUILD_DIR
+mkdir -p static | indent
+./hugo | indent

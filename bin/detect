@@ -1,0 +1,13 @@
+#!/bin/sh
+
+BUILD_DIR=$1
+
+CONFIG_FILE="`ls $BUILD_DIR | grep config`"
+
+if [ -z $CONFIG_FILE ]; then
+  echo "\n-----> No config file!"
+  exit 1
+fi
+
+echo "Hugo"
+exit 0
