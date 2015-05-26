@@ -13,7 +13,7 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 
 # Hugo version
-VERSION="0.13"
+VERSION="0.14"
 
 # Hugo URL ( download from GH builds )
 ARCHIVE_NAME=hugo_${VERSION}_linux_amd64
