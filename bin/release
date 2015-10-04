@@ -1,7 +1,10 @@
 #!/bin/sh
+if [ -z "$HUGOPATH" ]; then
+	HUGOPATH="public"
+fi
 
 cat << EOF
 ---
 default_process_types:
-  web: "cd public && python -m SimpleHTTPServer \$PORT"
+  web: "cd \$HUGOPATH && python -m SimpleHTTPServer \$PORT"
 EOF
