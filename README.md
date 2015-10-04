@@ -27,6 +27,20 @@ $ git push heroku master
 $ heroku open
 ```
 
+Environment Variables
+===
+
+To use a custom config file name or `publishdir` you can use these environment variables:
+
+```bash
+$ heroku config:set HUGOCONFIG="config_de.toml"
+```
+
+```bash
+$ heroku config:set HUGOPATH="public/custom"
+```
+
+
 Legacy Compatibility
 ===
 
