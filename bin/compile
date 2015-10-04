@@ -41,8 +41,15 @@ if [ -e $BUILD_DIR/.hugotheme ]; then
   git clone $THEME_URL
 fi
 
+# Fetch config file
+if [ -z "$HUGOCONFIG" ]; then
+	CONFIG_FILE="`ls $BUILD_DIR | grep config | head -n1`"
+else
+	CONFIG_FILE="$HUGOCONFIG"
+fi
+
 # Build the site
-echo "\n-----> Building the site"
+echo "\n-----> Building the site with config file $CONFIG_FILE"
 cd $BUILD_DIR
 mkdir -p static | indent
-./hugo | indent
+./hugo --config="$CONFIG_FILE" | indent
