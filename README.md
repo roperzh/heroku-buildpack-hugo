@@ -65,7 +65,7 @@ Heroku will take care to fetch all the submodules in your project.
 Important notes
 ===
 
-Don't forget to configure your hugo `baseurl` with the url of your application.
+Don't forget to configure your hugo `baseurl` with the url of your application, using **https://** not http://
 
 Contributing
 ===
