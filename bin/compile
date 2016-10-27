@@ -16,7 +16,8 @@ CACHE_DIR=$2
 VERSION="0.17"
 
 # Hugo URL ( download from GH builds )
-ARCHIVE_NAME=hugo_${VERSION}_Linux_64bit
+ARCHIVE_NAME=hugo_${VERSION}_Linux-64bit
+EXTRACT_NAME=hugo_${VERSION}_linux_amd64
 FILE_NAME=${ARCHIVE_NAME}.tar.gz
 HUGO_PACKAGE=https://github.com/spf13/hugo/releases/download/v${VERSION}/${FILE_NAME}
 
@@ -29,9 +30,9 @@ fi
 
 # Extract the binary in the working directory
 echo "\n-----> Extracting Hugo ${VERSION} binaries to ${BUILD_DIR}/vendor/hugo"
-mkdir -p $CACHE_DIR/$ARCHIVE_NAME | indent
+mkdir -p $CACHE_DIR/$EXTRACT_NAME | indent
 tar -zxvf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR | indent
-mv $CACHE_DIR/$ARCHIVE_NAME/$ARCHIVE_NAME $BUILD_DIR/hugo | indent
+mv $CACHE_DIR/$EXTRACT_NAME/$EXTRACT_NAME $BUILD_DIR/hugo | indent
 
 # Fetch a theme specified in the .hugotheme file
 if [ -e $BUILD_DIR/.hugotheme ]; then
