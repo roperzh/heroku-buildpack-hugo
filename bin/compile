@@ -16,7 +16,7 @@ CACHE_DIR=$2
 VERSION="0.17"
 
 # Hugo URL ( download from GH builds )
-ARCHIVE_NAME=hugo_${VERSION}_Linux_64bit
+ARCHIVE_NAME=hugo_${VERSION}_Linux-64bit
 FILE_NAME=${ARCHIVE_NAME}.tar.gz
 HUGO_PACKAGE=https://github.com/spf13/hugo/releases/download/v${VERSION}/${FILE_NAME}
 
