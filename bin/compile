@@ -13,13 +13,12 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 
 # Hugo version
-VERSION="0.20.3"
+VERSION="v0.20.3"
 
 # Hugo URL ( download from GH builds )
-ARCHIVE_NAME=hugo_${VERSION}_Linux-64bit
-FILE_NAME=${ARCHIVE_NAME}.tar.gz
-EXECUTABLE_NAME=hugo_${VERSION}_linux_amd64
-HUGO_PACKAGE=https://github.com/spf13/hugo/releases/download/v${VERSION}/${FILE_NAME}
+RELEASE_NAME=hugo_${VERSION}_Linux-64bit
+FILE_NAME=${RELEASE_NAME}.tar.gz
+HUGO_PACKAGE=https://github.com/spf13/hugo/releases/download/${VERSION}/${FILE_NAME}
 
 # Store the hugo package in the cache_dir ( persistent across builds )
 mkdir -p $CACHE_DIR
@@ -29,10 +28,10 @@ if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
 fi
 
 # Extract the binary in the working directory
-echo "\n-----> Extracting Hugo ${VERSION} binaries to ${BUILD_DIR}/vendor/hugo"
-mkdir -p $CACHE_DIR/$EXECUTABLE_NAME | indent
+echo "\n-----> Extracting Hugo ${VERSION} binaries to ${BUILD_DIR}"
+mkdir -p $CACHE_DIR/$RELEASE_NAME | indent
 tar -zxvf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR | indent
-mv $CACHE_DIR/$EXECUTABLE_NAME/$EXECUTABLE_NAME $BUILD_DIR/hugo | indent
+mv $CACHE_DIR/hugo $BUILD_DIR/hugo | indent
 
 # Fetch a theme specified in the .hugotheme file
 if [ -e $BUILD_DIR/.hugotheme ]; then
