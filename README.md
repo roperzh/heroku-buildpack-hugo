@@ -41,7 +41,23 @@ git push heroku master
 Using themes
 ===
 
-This buildpack provides a simple api to use custom themes, just add a `.hugotheme`
+Specifying out a custom theme
+---
+
+To use a custom theme create a `.hugothemename` file with the name of the theme in.
+
+***Example***
+
+To use the great [hyde](https://github.com/spf13/hyde.git) theme:
+
+```
+hyde
+```
+
+Checking out a custom theme
+---
+
+This buildpack provides a simple api to checkout custom themes, just add a `.hugotheme`
 file in the root of your application with the url of your theme.
 
 ***Example***

@@ -41,8 +41,13 @@ if [ -e $BUILD_DIR/.hugotheme ]; then
   git clone $THEME_URL
 fi
 
+# Use theme specified in the .hugothemename file
+if [ -e $BUILD_DIR/.hugothemename ]; then
+  THEME="`cat $BUILD_DIR/.hugothemename`"
+fi
+
 # Build the site
 echo "\n-----> Building the site"
 cd $BUILD_DIR
 mkdir -p static | indent
-./hugo | indent
+./hugo -t $THEME | indent
