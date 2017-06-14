@@ -13,12 +13,12 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 
 # Hugo version
-VERSION="v0.20.3"
+VERSION="0.20.3"
 
 # Hugo URL ( download from GH builds )
 RELEASE_NAME=hugo_${VERSION}_Linux-64bit
 FILE_NAME=${RELEASE_NAME}.tar.gz
-HUGO_PACKAGE=https://github.com/spf13/hugo/releases/download/${VERSION}/${FILE_NAME}
+HUGO_PACKAGE=https://github.com/spf13/hugo/releases/download/v${VERSION}/${FILE_NAME}
 
 # Store the hugo package in the cache_dir ( persistent across builds )
 mkdir -p $CACHE_DIR
