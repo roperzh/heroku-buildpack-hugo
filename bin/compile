@@ -13,7 +13,7 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 
 # Hugo version
-VERSION="0.20.3"
+VERSION="0.22.1"
 
 # Hugo URL ( download from GH builds )
 RELEASE_NAME=hugo_${VERSION}_Linux-64bit
