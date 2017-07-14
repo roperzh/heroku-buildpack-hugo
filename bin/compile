@@ -1,5 +1,5 @@
 #!/bin/sh
-# bin/compile <build-dir> <cache-dir>
+# bin/compile <build-dir> <cache-dir> <env-dir>
 set -e
 
 # Used to format the output based on heroku guidelines
@@ -11,24 +11,33 @@ indent() {
 
 BUILD_DIR=$1
 CACHE_DIR=$2
+ENV_DIR=$3
 
-# Hugo version
-VERSION="0.23"
+# Default Hugo version
+DEFAULT_HUGO_VERSION="0.25"
+
+# attempt to extract the HUGO_VERSION parameter form the Heroku configuration vars, fall back to the default version if unavailable
+if [ -d "$ENV_DIR" -a -e "$ENV_DIR/HUGO_VERSION" ]; then
+  export HUGO_VERSION=$(cat "$ENV_DIR/HUGO_VERSION")
+else
+  echo "\n-----> HUGO VERSION not defined, using $DEFAULT_HUGO_VERSION."
+  export HUGO_VERSION=$DEFAULT_HUGO_VERSION
+fi
 
 # Hugo URL ( download from GH builds )
-RELEASE_NAME=hugo_${VERSION}_Linux-64bit
+RELEASE_NAME=hugo_${HUGO_VERSION}_Linux-64bit
 FILE_NAME=${RELEASE_NAME}.tar.gz
-HUGO_PACKAGE=https://github.com/spf13/hugo/releases/download/v${VERSION}/${FILE_NAME}
+HUGO_PACKAGE=https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${FILE_NAME}
 
 # Store the hugo package in the cache_dir ( persistent across builds )
 mkdir -p $CACHE_DIR
 if ! [ -e $CACHE_DIR/$FILE_NAME ]; then
-  echo "\n-----> Fetching Hugo ${VERSION} binaries at ${HUGO_PACKAGE}"
+  echo "\n-----> Fetching Hugo ${HUGO_VERSION} binaries at ${HUGO_PACKAGE}"
   curl $HUGO_PACKAGE -L -s -o $CACHE_DIR/$FILE_NAME | indent
 fi
 
 # Extract the binary in the working directory
-echo "\n-----> Extracting Hugo ${VERSION} binaries to ${BUILD_DIR}"
+echo "\n-----> Extracting Hugo ${HUGO_VERSION} binaries to ${BUILD_DIR}"
 mkdir -p $CACHE_DIR/$RELEASE_NAME | indent
 tar -zxvf $CACHE_DIR/$FILE_NAME -C $CACHE_DIR | indent
 mv $CACHE_DIR/hugo $BUILD_DIR/hugo | indent
