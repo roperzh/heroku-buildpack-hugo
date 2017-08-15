@@ -2,9 +2,13 @@
 
 BUILD_DIR=$1
 
-CONFIG_FILE="`ls $BUILD_DIR | grep config`"
+if [ -z "$HUGOCONFIG" ]; then
+	CONFIG_FILE="`ls $BUILD_DIR | grep config | head -n1`"
+else
+	CONFIG_FILE="$HUGOCONFIG"
+fi
 
-if [ -z $CONFIG_FILE ]; then
+if [ -z "$CONFIG_FILE" ]; then
   echo "\n-----> Hugo expects to find a config file in the root of the source directory! please include a config.toml, config.yaml or config.json file"
   exit 1
 fi
