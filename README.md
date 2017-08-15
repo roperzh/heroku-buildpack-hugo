@@ -39,7 +39,7 @@ Legacy Compatibility
 For most pages this buildpack should work just fine. If, however, you're unable to deploy using this new version of the buildpack, you can get your app working again by locking it to the previous version:
 
 ```bash
-heroku buildpacks:set https://github.com/roperzh/heroku-buildpack-hugo#v0.22.1
+heroku buildpacks:set https://github.com/roperzh/heroku-buildpack-hugo#v0.23
 git commit -am "Empty commit" --allow-empty
 git push heroku master
 ```
