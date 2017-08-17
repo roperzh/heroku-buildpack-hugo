@@ -25,6 +25,11 @@ Optionally, define a `HUGO_VERSION` Config Var to specify the Hugo version you w
 ```bash
 $ heroku config:set HUGO_VERSION=0.25
 ```
+Or set a `HUGO_BUILD_DRAFTS` Config Var to `TRUE` to get hugo to publish draft content.
+
+```bash
+$ heroku config:set HUGO_BUILD_DRAFTS=TRUE
+```
 
 Then simply git push to heroku and open your application!
 
