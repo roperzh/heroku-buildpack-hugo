@@ -50,8 +50,20 @@ if [ -e $BUILD_DIR/.hugotheme ]; then
   git clone $THEME_URL
 fi
 
+# attempt to extract the HUGO_BUILD_DRAFTS parameter form the Heroku configuration vars, fall back to FALSE if unavailable
+if [ -d "$ENV_DIR" -a -e "$ENV_DIR/HUGO_BUILD_DRAFTS" ]; then
+  HUGO_BUILD_DRAFTS=$(cat "$ENV_DIR/HUGO_BUILD_DRAFTS")
+  echo "\n-----> HUGO BUILD DRAFTS Enabled. Draft posts will be published."
+else
+  HUGO_BUILD_DRAFTS=FALSE
+fi
+
 # Build the site
 echo "\n-----> Building the site"
 cd $BUILD_DIR
 mkdir -p static | indent
-./hugo | indent
+if [ $HUGO_BUILD_DRAFTS ]; then
+  ./hugo --buildDrafts | indent
+else
+  ./hugo | indent
+fi
