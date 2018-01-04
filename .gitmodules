@@ -1,0 +1,3 @@
+[submodule "heroku-buildpack-static"]
+	path = heroku-buildpack-static
+	url = https://github.com/heroku/heroku-buildpack-static.git

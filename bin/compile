@@ -56,3 +56,6 @@ cd $BUILD_DIR
 echo "staticDir: \"public_html\"" >> config.yml
 mkdir -p public_html | indent
 ./hugo | indent
+
+BP_DIR=`cd $(dirname $0); cd ..; pwd`
+$BP_DIR/heroku-buildpack-static/bin/compile $BUILD_DIR $CACHE_DIR $ENV_DIR
