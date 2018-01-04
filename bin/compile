@@ -53,5 +53,6 @@ fi
 # Build the site
 echo "\n-----> Building the site"
 cd $BUILD_DIR
-mkdir -p static | indent
+echo "staticDir: \"public_html\"" >> config.yml
+mkdir -p public_html | indent
 ./hugo | indent

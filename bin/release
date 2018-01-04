@@ -1,7 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-cat << EOF
----
-default_process_types:
-  web: "cd public && python -m SimpleHTTPServer \$PORT"
-EOF
+# Use architecture of multi-buildpack to compose behavior.
+# https://github.com/heroku/heroku-buildpack-multi
+if [ -e $1/last_pack_release.out ]; then
+  cat $1/last_pack_release.out
+  rm $1/last_pack_release.out
+else
+  echo "--- {}"
+fi
