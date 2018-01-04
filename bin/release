@@ -3,6 +3,6 @@
 
 cd $(dirname $0)
 cd ..
-git submodule init | indent
-git submodule update | indent
+git submodule init
+git submodule update
 heroku-buildpack-static/bin/release $1
