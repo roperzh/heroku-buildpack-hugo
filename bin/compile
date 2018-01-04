@@ -58,4 +58,7 @@ mkdir -p public_html | indent
 ./hugo | indent
 
 BP_DIR=`cd $(dirname $0); cd ..; pwd`
-$BP_DIR/heroku-buildpack-static/bin/compile $BUILD_DIR $CACHE_DIR $ENV_DIR
+cd $BP_DIR
+git submodule init
+git submodule update
+heroku-buildpack-static/bin/compile $BUILD_DIR $CACHE_DIR $ENV_DIR
