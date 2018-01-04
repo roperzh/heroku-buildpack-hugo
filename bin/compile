@@ -53,7 +53,7 @@ fi
 # Build the site
 echo "\n-----> Building the site"
 cd $BUILD_DIR
-echo "publishDir: \"public_html\"" >> config.yml
+echo "publishDir = \"public_html\"" >> config.toml
 ./hugo | indent
 
 # Run Static Build Pack Compile
