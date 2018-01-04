@@ -54,11 +54,12 @@ fi
 echo "\n-----> Building the site"
 cd $BUILD_DIR
 echo "publishDir: \"public_html\"" >> config.yml
-mkdir -p public_html | indent
 ./hugo | indent
 
+# Run Static Build Pack Compile
+echo "\n-----> Running Static Build Pack Compile"
 BP_DIR=`cd $(dirname $0); cd ..; pwd`
 cd $BP_DIR
-git submodule init
-git submodule update
+git submodule init | indent
+git submodule update | indent
 heroku-buildpack-static/bin/compile $BUILD_DIR $CACHE_DIR $ENV_DIR
