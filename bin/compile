@@ -53,5 +53,13 @@ fi
 # Build the site
 echo "\n-----> Building the site"
 cd $BUILD_DIR
-mkdir -p static | indent
+echo "publishDir = \"public_html\"" >> config.toml
 ./hugo | indent
+
+# Run Static Build Pack Compile
+echo "\n-----> Running Static Build Pack Compile"
+BP_DIR=`cd $(dirname $0); cd ..; pwd`
+cd $BP_DIR
+git submodule init | indent
+git submodule update | indent
+heroku-buildpack-static/bin/compile $BUILD_DIR $CACHE_DIR $ENV_DIR

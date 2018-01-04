@@ -1,7 +1,8 @@
-#!/bin/sh
+#!/usr/bin/env bash
+# bin/release <build-dir>
 
-cat << EOF
----
-default_process_types:
-  web: "cd public && python -m SimpleHTTPServer \$PORT"
-EOF
+cd $(dirname $0)
+cd ..
+git submodule init
+git submodule update
+heroku-buildpack-static/bin/release $1
