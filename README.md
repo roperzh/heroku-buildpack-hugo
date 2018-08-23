@@ -11,13 +11,13 @@ Usage
 Create a Heroku application using this buildpack:
 
 ```bash
-$ heroku create --buildpack https://github.com/roperzh/heroku-buildpack-hugo.git
+$ heroku create --buildpack roperzh/hugo
 ```
 
 or configure your existent application:
 
 ```bash
-$ heroku buildpacks:set BUILDPACK_URL="https://github.com/roperzh/heroku-buildpack-hugo.git"
+$ heroku buildpacks:set roperzh/hugo
 ```
 
 Optionally, define a `HUGO_VERSION` Config Var to specify the Hugo version you wish to use:
@@ -56,6 +56,15 @@ Alternative method
 If you don't like the idea of a `.hugotheme` file, you can simply manage your
 themes with [git submodules](http://git-scm.com/book/en/Git-Tools-Submodules).
 Heroku will take care to fetch all the submodules in your project.
+
+Using the latest buildpack code
+===
+
+The `roperzh/hugo` buildpack from the [Heroku Buildpack Registry](https://devcenter.heroku.com/articles/buildpack-registry) represents the latest stable version of the buildpack. If you'd like to use the latest buildpack code from this Github repository, you can set your buildpack to the Github URL:
+
+```sh-session
+$ heroku buildpacks:set https://github.com/roperzh/heroku-buildpack-hugo
+```
 
 Important notes
 ===
