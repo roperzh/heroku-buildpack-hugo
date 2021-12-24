@@ -3,5 +3,5 @@
 cat << EOF
 ---
 default_process_types:
-  web: "hugo server --disableLiveReload --renderToDisk --bind 0.0.0.0 --port \$PORT"
+  web: "./hugo server --disableLiveReload --renderToDisk --bind 0.0.0.0 --port \$PORT"
 EOF
