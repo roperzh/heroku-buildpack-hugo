@@ -1,5 +1,5 @@
 #!/bin/sh
-
+set -x
 cat << EOF
 ---
 default_process_types:
