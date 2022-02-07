@@ -20,10 +20,16 @@ or configure your existent application:
 $ heroku buildpacks:set BUILDPACK_URL="https://github.com/roperzh/heroku-buildpack-hugo.git"
 ```
 
-Optionally, define a `HUGO_VERSION` Config Var to specify the Hugo version you wish to use:
+Optionally, define a `HUGO_VERSION` Config Var to specify the Hugo version you wish to use(default latest):
 
 ```bash
-$ heroku config:set HUGO_VERSION=0.25
+$ heroku config:set HUGO_VERSION=0.92.1
+```
+
+Optionally, define a `HUGO_EXTENDED` Config Var(any value works) to install the extended version(default normal):
+
+```bash
+$ heroku config:set HUGO_EXTENDED=ok
 ```
 
 Then simply git push to heroku and open your application!
