@@ -13,8 +13,8 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
 
-# Default Hugo version
-DEFAULT_HUGO_VERSION="0.26"
+# Default Hugo version(latest)
+DEFAULT_HUGO_VERSION=`curl https://api.github.com/repos/gohugoio/hugo/releases/latest | grep "browser_download_url" | grep -Eo 'https://[^\"]*' | grep .txt | awk -v FS="(download/v|/hugo_)" '{print $2}'`
 
 # attempt to extract the HUGO_VERSION parameter form the Heroku configuration vars, fall back to the default version if unavailable
 if [ -d "$ENV_DIR" -a -e "$ENV_DIR/HUGO_VERSION" ]; then
@@ -24,10 +24,17 @@ else
   export HUGO_VERSION=$DEFAULT_HUGO_VERSION
 fi
 
+# extended options
+if [ -d "$ENV_DIR" -a -e "$ENV_DIR/HUGO_EXTENDED" ]; then
+  export HUGO_EXTENDED=extended_
+else
+  echo "\n-----> HUGO EXTENDED not defined."
+fi
+
 # Hugo URL ( download from GH builds )
-RELEASE_NAME=hugo_${HUGO_VERSION}_Linux-64bit
+RELEASE_NAME=hugo_${HUGO_EXTENDED}${HUGO_VERSION}_Linux-64bit
 FILE_NAME=${RELEASE_NAME}.tar.gz
-HUGO_PACKAGE=https://github.com/spf13/hugo/releases/download/v${HUGO_VERSION}/${FILE_NAME}
+HUGO_PACKAGE=https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${FILE_NAME}
 
 # Store the hugo package in the cache_dir ( persistent across builds )
 mkdir -p $CACHE_DIR
